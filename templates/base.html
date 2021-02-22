@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{pageTitle}}</title>
+    <!-- slider -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/noUiSlider.css') }}">
+    <script src="{{ url_for('static', filename='js/noUiSlider.js') }}"></script>
+    <style>
+        input {
+            padding: 7px;
+            margin: 15px 5px 5px;
+            width: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="view">
+    <form method="post">
+        <div id="html5"></div>
+        Min: <input id="input-min" name="min1"/> 
+        Max: <input id="input-max" name="max1"/>
+        <br>
+        <input class="button" type="submit"/>
+    </form>
+    <p>{{display}}</p>
+</div>
+
+<script>
+    // initialize the slider
+    var html5Slider = document.getElementById('html5');
+
+    noUiSlider.create(html5Slider, {
+        start: [10, 30],
+        connect: true,
+        range: {
+            'min': -20,
+            'max': 40
+        }
+    });
+
+    // update the input
+    var inputMin = document.getElementById('input-min');
+    var inputMax = document.getElementById('input-max');
+
+    html5Slider.noUiSlider.on('update', function (values, handle) {
+
+        var value = values[handle];
+
+        if (handle) {
+            inputMax.value = value;
+        } else {
+            inputMin.value = value;
+        }
+    });
+
+    inputMin.addEventListener('change', function () {
+        html5Slider.noUiSlider.set([this.value, null]);
+    });
+
+    inputMax.addEventListener('change', function () {
+        html5Slider.noUiSlider.set([null, this.value]);
+    });
+</script>
+{% endblock %}
