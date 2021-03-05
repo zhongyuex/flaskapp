@@ -1,3 +1,10 @@
+/* input box margins */
+input {
+  padding: 7px;
+  margin: 15px 5px 5px;
+  width: 70px;
+}
+
 /*! nouislider - 14.6.3 - 11/19/2020 */
 /* Functional styling;
  * These styles are required for noUiSlider to function.

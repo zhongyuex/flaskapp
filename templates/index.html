@@ -1,50 +1,38 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="view">
-    <form method="post">
-        <div id="html5"></div>
-        Min: <input id="input-min" name="min1"/> 
-        Max: <input id="input-max" name="max1"/>
-        <br>
-        <input class="button" type="submit"/>
-    </form>
+<div class="container">
+    <div class="jumbotron">
+        <h1>TUBED2LONG</h1>
+        <p>Use the following variables recorded within the first <b>24</b> hours of mechanical ventilation
+            to predict patients that will require ongoing mechanical ventilation at <b>72</b> hours.
+            The model was developed using the data from MIMIC-IV and validated on the multi-centre eICU data.</p>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Respiratory Rate</h2>
+            <form method="post">
+                <div id="rr"></div>
+                Min: <input type="number" step="0.01" id="rr-min" name="min1"/> 
+                Max: <input type="number" step="0.01" id="rr-max" name="max1"/>
+                <br/>
+                <input class="button" type="submit"/>
+            </form>
+        </div>
+        <div class="col">
+            <h2>Temperature</h2>
+            <form method="post">
+                <div id="temp"></div>
+                Min: <input type="number" step="0.01" id="temp-min" name="min2"/> 
+                Max: <input type="number" step="0.01" id="temp-max" name="max2"/>
+                <br/>
+            </form>
+        </div>
+    </div>
     <p>{{display}}</p>
 </div>
 
-<script>
-    // initialize the slider
-    var html5Slider = document.getElementById('html5');
-
-    noUiSlider.create(html5Slider, {
-        start: [10, 30],
-        connect: true,
-        range: {
-            'min': -20,
-            'max': 40
-        }
-    });
-
-    // update the input
-    var inputMin = document.getElementById('input-min');
-    var inputMax = document.getElementById('input-max');
-
-    html5Slider.noUiSlider.on('update', function (values, handle) {
-
-        var value = values[handle];
-
-        if (handle) {
-            inputMax.value = value;
-        } else {
-            inputMin.value = value;
-        }
-    });
-
-    inputMin.addEventListener('change', function () {
-        html5Slider.noUiSlider.set([this.value, null]);
-    });
-
-    inputMax.addEventListener('change', function () {
-        html5Slider.noUiSlider.set([null, this.value]);
-    });
-</script>
+<!-- nouislider -->
+<script src="{{ url_for('static', filename='js/noUiSlider.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sliders/rr.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sliders/temp.js') }}"></script>
 {% endblock %}
